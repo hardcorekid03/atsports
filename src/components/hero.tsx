@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Play } from "lucide-react";
 import { useKeenSlider } from "keen-slider/react";
@@ -13,7 +13,7 @@ function HeroSection({ onGetStarted }: LandingPageProps) {
   const posters = useFetchPosters();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const [sliderRef] = useKeenSlider<HTMLDivElement>(
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
     {
       loop: true,
       slides: { perView: 1 },
@@ -29,10 +29,23 @@ function HeroSection({ onGetStarted }: LandingPageProps) {
     posters[currentSlide] ||
     "https://helios-i.mashable.com/imagery/articles/00g25aEcur2kjg9jd7L05SO/hero-image.fill.size_1248x702.v1727862489.jpg";
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      instanceRef.current?.next(); // Move to next slide
+    }, 2500); // 1.5 seconds
+
+    return () => clearInterval(interval); // Clear interval on unmount
+  }, [instanceRef]);
+
   return (
     <section
       className="relative bg-cover bg-center bg-no-repeat py-20 md:py-32 transition-all duration-700"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       {/* Black gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-black/70 z-0" />
@@ -64,8 +77,8 @@ function HeroSection({ onGetStarted }: LandingPageProps) {
             </div>
           </div>
 
-          <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl border animate-fade-in delay-200">
-            {posters.length > 0 ? (
+          <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl border animate-fade-in delay-200 md:block hidden">
+          {posters.length > 0 ? (
               <div ref={sliderRef} className="keen-slider w-full h-full">
                 {posters.map((poster, index) => (
                   <div key={index} className="keen-slider__slide relative">

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Users, Play } from "lucide-react";
 import type { Stream } from "@/lib/types";
@@ -58,7 +58,7 @@ export default function LivePreviewSection({
   const linkToLive = () => {
     navigate("/live");
   };
-  
+
   return (
     <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
@@ -111,25 +111,15 @@ export default function LivePreviewSection({
                   className="overflow-hidden group cursor-pointer"
                   onClick={() => onWatchStream(stream)}
                 >
-                  <div className="relative h-48 bg-muted">
+                  <CardContent className="relative h-48 bg-muted p-0">
                     {/* Stream thumbnail */}
-                    {stream.poster ? (
+                    <div className="w-full h-full relative">
                       <img
                         src={stream.poster || "/placeholder.svg"}
                         alt={stream.name}
-                        className="object-cover"
+                        className="w-full h-full object-cover"
                       />
-                    ) : (
-                      <div className="flex items-center justify-center h-full">
-                        <img
-                          src="/placeholder.svg?height=200&width=350"
-                          alt={stream.name}
-                          width={350}
-                          height={200}
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
+                    </div>
 
                     {/* Category and LIVE badge */}
                     <div className="absolute top-2 left-2 bg-background/80 backdrop-blur-sm text-sm font-medium px-2 py-1 rounded">
@@ -145,7 +135,7 @@ export default function LivePreviewSection({
                         <Play className="h-4 w-4" /> Watch Now
                       </Button>
                     </div>
-                  </div>
+                  </CardContent>
 
                   <div className="p-4">
                     <h3 className="font-bold mb-2 line-clamp-1">{title}</h3>
@@ -155,6 +145,7 @@ export default function LivePreviewSection({
                     </div>
                   </div>
                 </Card>
+
               );
             })
           ) : (

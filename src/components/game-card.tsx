@@ -15,21 +15,22 @@ interface GameCardProps {
 
 export default function GameCard({ stream, isLive, onWatch }: GameCardProps) {
   return (
-    <Card className="overflow-hidden flex flex-col h-full">
+    <Card className="overflow-hidden flex flex-col h-full group cursor-pointer">
       <div className="relative h-48 bg-muted">
         {stream.poster ? (
-          <div className="flex items-center justify-center h-full">
+          <div className="w-full h-full overflow-hidden">
             <img
               src={stream.poster || "/placeholder.svg"}
               alt={stream.name}
-              className="object-cover"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         ) : (
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center w-full h-full">
             <span className="text-muted-foreground">No image available</span>
           </div>
         )}
+
         {isLive && (
           <Badge variant="destructive" className="absolute top-2 right-2">
             LIVE
@@ -41,6 +42,7 @@ export default function GameCard({ stream, isLive, onWatch }: GameCardProps) {
           </Badge>
         )}
       </div>
+
       <CardContent className="p-4 flex-grow">
         <h3 className="text-base font-bold mb-2 line-clamp-2">{stream.name}</h3>
 
@@ -75,5 +77,6 @@ export default function GameCard({ stream, isLive, onWatch }: GameCardProps) {
         </Button>
       </CardFooter>
     </Card>
+
   );
 }
