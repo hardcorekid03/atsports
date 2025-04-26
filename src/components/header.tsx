@@ -4,8 +4,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import darkLogo from "@/assets/images/darkLogo.svg";
-import lightLogo from "@/assets/images/lightLogo.svg";
+// import darkLogo from "@/assets/images/darkLogo.svg";
+// import lightLogo from "@/assets/images/lightLogo.svg";
 
 
 const navItems = [
@@ -41,16 +41,13 @@ function Header() {
     <header className="border-b bg-background sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto py-4 px-4 flex items-center justify-between">
         <Link to="/" className="text-2xl font-bold cursor-pointer">
-          <img
+        ATSports.
+          {/* <img
             src={lightLogo}
             alt="Logo"
             className="h-8 w-120 mr-2 dark:hidden" // hide on dark mode
-          />
-          <img
-            src={darkLogo}
-            alt="Logo"
-            className="h-8 w-120 mr-2 hidden dark:block" // show on dark mode
-          />
+          /> */}
+
         </Link>
 
         {/* Desktop Nav */}
