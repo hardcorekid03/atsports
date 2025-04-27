@@ -1,5 +1,6 @@
 import type { ApiResponse } from "./types"
 
+
 export async function fetchStreams(): Promise<ApiResponse> {
   try {
     const proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://ppv.wtf/api/streams")
