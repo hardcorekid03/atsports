@@ -1,7 +1,4 @@
-"use client"
-
 import { useEffect, useRef } from "react"
-import { X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import type { Stream } from "@/lib/types"
@@ -46,10 +43,7 @@ export default function VideoPlayerModal({ stream, isOpen, onClose }: VideoPlaye
       <DialogContent className="max-w-5xl w-[95vw] p-0 overflow-hidden">
         <DialogHeader className="p-4 flex flex-row items-center justify-between">
           <DialogTitle className="text-lg font-semibold">{stream.name}</DialogTitle>
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </Button>
+
         </DialogHeader>
 
         <div className="relative bg-black aspect-video w-full">
